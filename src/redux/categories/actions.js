@@ -10,16 +10,18 @@ import { clearNotif } from "../notif/actions";
 
 let debouncedFetchCategories = debounce(getData, 1000); // debounce untuk nge delay selama 1 detik baru masuk ke getData | jadi ada jeda waktu setiap ngetik keyword pencarian, biar servernya ga ke request terus menerus
 
+// START
 export const startFetchingCategories = () => {
   return {
     type: START_FETCHING_CATEGORIES,
   };
 };
 
+// SUCCESS
 export const successFetchingCategories = ({ categories }) => {
   return {
-    type: SUCCESS_FETCHING_CATEGORIES,
-    categories,
+    type: SUCCESS_FETCHING_CATEGORIES, // ngasih type action ke reducer
+    categories, // ngasih data categories ke reducer
   };
 };
 
@@ -33,6 +35,7 @@ export const fetchCategories = () => {
   return async (dispatch) => {
     dispatch(startFetchingCategories()); // dispatch untuk mengirim action ke reducer
 
+    // ketika start jalankan try catch ini
     try {
       setTimeout(() => {
         dispatch(clearNotif());
@@ -40,9 +43,10 @@ export const fetchCategories = () => {
 
       let res = await debouncedFetchCategories("/cms/categories");
 
+      // jika success, maka jalankan successFetchingCategories, agar data yang didapat dari server bisa diolah di reducer dan muncul datanya di halaman client
       dispatch(
         successFetchingCategories({
-          categories: res.data.data,
+          categories: res.data.data, // data categories yang didapat dari server akan dimasukkan ke dalam categories di reducer
         })
       );
     } catch (error) {

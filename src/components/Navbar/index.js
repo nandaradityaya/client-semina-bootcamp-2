@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import NavLink from "../NavAccess";
 import { useNavigate } from "react-router-dom";
 import {
@@ -92,7 +92,15 @@ function SNavbar() {
           >
             Transactions
           </NavLink>
-          <Button onClick={handleLogout}>Logout</Button>
+        </Nav>
+        <Nav>
+          <Nav.Link
+            onClick={() => {
+              handleLogout();
+            }}
+          >
+            Logout
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>

@@ -61,7 +61,7 @@ function Categories() {
         <SAlert type={notif.typeNotif} message={notif.message} />
       )}
       <Table
-        status={categories.status} // statuss dari redux (proses, sukses, gagal)
+        status={categories.status} // statuss dari redux reducer (proses, sukses, gagal)
         thead={["Nama", "Aksi"]} // theadnya nama dan aksi
         data={categories.data} // data dari redux, ambilnya dari API
         tbody={["name"]} // tbody yg di tampilkan di table (namanya harus sama dengan yg di API, di API saya pakenya name)

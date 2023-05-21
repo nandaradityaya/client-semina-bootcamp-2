@@ -2,6 +2,7 @@ import axios from "axios";
 import handleError from "./handleError";
 import { config } from "../configs";
 
+// parmsnya url dan params | url adalah endpointnya, params adalah data yang mau dikirim ke backend atau yg di ketikan oleh user di search bar
 export async function getData(url, params) {
   try {
     // cek tokennya dulu ada atau tidak
@@ -10,7 +11,7 @@ export async function getData(url, params) {
       : {};
 
     return await axios.get(`${config.api_host_dev}${url}`, {
-      params,
+      params, // params ini adalah data yang mau dikirim ke backend atau yg di ketikan oleh user di search bar
       headers: {
         Authorization: `Bearer ${token}`, // set token ke header bearernya | ini utk cek apakah user sudah login atau belum
       },

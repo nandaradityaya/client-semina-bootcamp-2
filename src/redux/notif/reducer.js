@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action) {
 
     // clear notif itu buat ngilangin notifnya atau balikin ke state awal
     case CLEAR_NOTIF:
-      return { state: initialState };
+      return { state: initialState }; // balikin ke initialState
 
     default:
       return state;

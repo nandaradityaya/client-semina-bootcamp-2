@@ -39,6 +39,7 @@ function TbodyWithAction({
                     <td key={key}>
                       {/* klo keynya === avatar maka munculin juga gambarnya */}
                       {key === "avatar" ? (
+                        // key === avatar maka munculin gambar | ini yg di manipulasi di action talents supaya bisa munculin gambar, jadi keynya di manipulasi di action talents
                         <Image
                           height={40}
                           width={40}
