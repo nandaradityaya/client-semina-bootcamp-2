@@ -1,21 +1,17 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PageSignin from "./pages/signin";
-import DashboardPage from "./pages/dashboard";
-import CategoriesPage from "./pages/categories";
-import CategoriesCreate from "./pages/categories/create";
-import CategoriesEdit from "./pages/categories/edit";
+import { BrowserRouter } from "react-router-dom";
+import { listen } from "./redux/listener";
+import { useEffect } from "react";
+import { AppRoutes } from "./routes";
 
 function App() {
+  useEffect(() => {
+    listen(); // jalanin dia waktu pertama kali halaman di render
+  }, []);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="signin" element={<PageSignin />} />
-        <Route path="/categories" element={<CategoriesPage />} />
-        <Route path="/categories/create" element={<CategoriesCreate />} />
-        <Route path="/categories/edit/:id" element={<CategoriesEdit />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

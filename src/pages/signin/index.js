@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Container, Card } from "react-bootstrap";
-import axios from "axios";
 import SAlert from "../../components/Alert";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SForm from "./form";
-
-import { config } from "../../configs"; // importnya harus dalam bentuk object karna exportnya di sana juga dalam bentuk object
+import { postData } from "../../utils/fetch";
+import { useDispatch } from "react-redux"; // useDispatch utk dispatch action ke redux | jadi ini untuk setiap kali ada perubahan di redux, maka akan di render ulang
+import { userLogin } from "../../redux/auth/actions";
 
 function PageSignin() {
-  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -31,13 +31,9 @@ function PageSignin() {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.post(
-        `${config.api_host_dev}/cms/auth/signin`,
-        form
-      );
+      const res = await postData(`/cms/auth/signin`, form); // kirim data ke API | kirim urlnya dan kirim payloadnya nanti ini di terima di parameter postData di utils/fetch.js
 
-      console.log(res.data.data.token);
-      localStorage.setItem("token", res.data.data.token); // set token ke local storage, fungsinya untuk ngecek user udah login atau belum
+      dispatch(userLogin(res.data.data.token, res.data.data.role)); // pake dispatch supaya kita bisa melakukan perubahan di actionnya, klo ga pake dispatch, kita ga bisa melakukan perubahan di actionnya dan gabisa manggil si userLogin
       setIsLoading(false);
       navigate("/");
     } catch (err) {
@@ -49,8 +45,6 @@ function PageSignin() {
       });
     }
   };
-
-  if (token) return <Navigate to="/" replace={true} />; // kalo tokennya ada, berarti redirect ke page dashboard
 
   return (
     <Container>

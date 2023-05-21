@@ -23,6 +23,7 @@ export default function CategoriesForm({
       <SButton variant="primary" action={handleSubmit} loading={isLoading}>
         {edit ? "Ubah" : "Simpan"}
       </SButton>
+      {/* props edit utk ngasih tau itu formnye edit atau simpan */}
     </Form>
   );
 }
