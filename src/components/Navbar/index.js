@@ -3,12 +3,12 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import NavLink from "../NavAccess";
 import { useNavigate } from "react-router-dom";
 import {
-  categories,
-  talents,
-  events,
-  participant,
-  payments,
-  orders,
+  accessCategories,
+  accessTalents,
+  accessEvents,
+  accessParticipant,
+  accessPayments,
+  accessOrders,
 } from "../../const/access";
 
 function SNavbar() {
@@ -17,11 +17,11 @@ function SNavbar() {
 
   useEffect(() => {
     const fetchData = () => {
-      let { role } = localStorage.getItem("auth") // cek role di localstorage yg login
+      let { role } = localStorage.getItem("auth") // ambil role dari localstorage
         ? JSON.parse(localStorage.getItem("auth"))
         : {};
 
-      setRole(role); // set role
+      setRole(role); // set state role
     };
     fetchData();
   }, []);
@@ -38,28 +38,28 @@ function SNavbar() {
         <Nav className="me-auto">
           <NavLink
             role={role}
-            roles={categories.lihat}
+            roles={accessCategories.lihat}
             action={() => navigate("/")}
           >
             Home
           </NavLink>
           <NavLink
             role={role}
-            roles={categories.lihat}
+            roles={accessCategories.lihat}
             action={() => navigate("/categories")}
           >
             Categories
           </NavLink>
           <NavLink
             role={role}
-            roles={talents.lihat}
+            roles={accessTalents.lihat}
             action={() => navigate("/talents")}
           >
             Talents
           </NavLink>
           <NavLink
             role={role}
-            roles={payments.lihat}
+            roles={accessPayments.lihat}
             action={() => navigate("/payments")}
           >
             Payment
@@ -73,34 +73,28 @@ function SNavbar() {
           </NavLink> */}
           <NavLink
             role={role}
-            roles={events.lihat}
+            roles={accessEvents.lihat}
             action={() => navigate("/events")}
           >
             Events
           </NavLink>
           <NavLink
             role={role}
-            roles={participant.lihat}
+            roles={accessParticipant.lihat}
             action={() => navigate("/participant")}
           >
             Participant
           </NavLink>
           <NavLink
             role={role}
-            roles={orders.lihat}
+            roles={accessOrders.lihat}
             action={() => navigate("/transactions")}
           >
             Transactions
           </NavLink>
         </Nav>
-        <Nav>
-          <Nav.Link
-            onClick={() => {
-              handleLogout();
-            }}
-          >
-            Logout
-          </Nav.Link>
+        <Nav className="justify-content-end">
+          <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

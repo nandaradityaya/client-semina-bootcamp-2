@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SBreadCrumb from "../../components/Breadcrumb";
@@ -10,6 +10,7 @@ import SAlert from "../../components/Alert";
 import Swal from "sweetalert2";
 import { deleteData } from "../../utils/fetch";
 import { setNotif } from "../../redux/notif/actions";
+import { accessCategories } from "../../const/access";
 
 function Categories() {
   const navigate = useNavigate();
@@ -17,6 +18,29 @@ function Categories() {
 
   const notif = useSelector((state) => state.notif); // ambil state notif dari redux store | state awalnya false
   const categories = useSelector((state) => state.categories);
+
+  const [access, setAccess] = useState({
+    tambah: false,
+    hapus: false,
+    edit: false,
+  });
+
+  const checkAccess = () => {
+    let { role } = localStorage.getItem("auth")
+      ? JSON.parse(localStorage.getItem("auth"))
+      : {};
+    const access = { tambah: false, hapus: false, edit: false };
+    Object.keys(accessCategories).forEach(function (key, index) {
+      if (accessCategories[key].indexOf(role) >= 0) {
+        access[key] = true;
+      }
+    });
+    setAccess(access);
+  };
+
+  useEffect(() => {
+    checkAccess();
+  }, []);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -52,9 +76,14 @@ function Categories() {
     <Container className="mt-3">
       <SBreadCrumb textSecound={"Categories"} />
 
-      <Button className={"mb-3"} action={() => navigate("/categories/create")}>
-        Tambah
-      </Button>
+      {access.tambah && (
+        <Button
+          className={"mb-3"}
+          action={() => navigate("/categories/create")}
+        >
+          Tambah
+        </Button>
+      )}
 
       {/* cek notifnya true atau false, klo true dia tampilin alert notifnya */}
       {notif.status && (
@@ -65,8 +94,8 @@ function Categories() {
         thead={["Nama", "Aksi"]} // theadnya nama dan aksi
         data={categories.data} // data dari redux, ambilnya dari API
         tbody={["name"]} // tbody yg di tampilkan di table (namanya harus sama dengan yg di API, di API saya pakenya name)
-        editUrl={`/categories/edit`} // editUrl ini untuk mengarahkan ke halaman edit, id nya diambil dari data._id di table
-        deleteAction={(id) => handleDelete(id)} // deleteAction ini untuk menghapus data, id nya diambil dari data._id di table
+        editUrl={access.edit ? `/categories/edit` : null} // editUrl ini untuk mengarahkan ke halaman edit, id nya diambil dari data._id di table
+        deleteAction={access.hapus ? (id) => handleDelete(id) : null} // deleteAction ini untuk menghapus data, id nya diambil dari data._id di table
         withoutPagination
       />
     </Container>
