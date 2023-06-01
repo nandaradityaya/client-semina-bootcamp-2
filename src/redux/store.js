@@ -12,9 +12,9 @@ import notifReducer from "./notif/reducer";
 import talentsReducer from "./talents/reducer";
 import paymentsReducer from "./payments/reducer";
 // import speakersReducer from './speakers/reducers';
-// import eventsReducer from './events/reducers';
-// import listsReducer from './lists/reducer';
-// import transactionsReducer from './transactions/reducers';
+import eventsReducer from "./events/reducer";
+import listsReducer from "./lists/reducer";
+import ordersReducer from "./orders/reducer";
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -26,9 +26,9 @@ const rootReducers = combineReducers({
   talents: talentsReducer,
   payments: paymentsReducer,
   // speakers: speakersReducer,
-  // events: eventsReducer,
-  // lists: listsReducer,
-  // transactions: transactionsReducer,
+  events: eventsReducer,
+  lists: listsReducer,
+  orders: ordersReducer,
 });
 const store = createStore(
   rootReducers,

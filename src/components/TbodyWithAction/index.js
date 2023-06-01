@@ -57,6 +57,8 @@ function TbodyWithAction({
               )}
               {!actionNotDisplay && (
                 <td>
+                  {/* customAction ini di pake untuk edit status event, jadi dia ambil data statusEventnya aja | kirim data id dan status ke index pages events */}
+                  {customAction && customAction(data._id, data.statusEvent)}
                   {editUrl && (
                     <Button
                       variant="success"
