@@ -83,14 +83,15 @@ function PaymentsCreate() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const payload = {
-        image: form.file,
-        type: form.type,
-      };
 
-      const res = await postData("/cms/payments", payload);
+    const payload = {
+      image: form.file,
+      type: form.type,
+    };
 
+    const res = await postData("/cms/payments", payload);
+
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -101,13 +102,13 @@ function PaymentsCreate() {
 
       navigate("/payments");
       setIsLoading(false);
-    } catch (err) {
+    } else {
       setIsLoading(false);
       setAlert({
         ...alert,
         status: true,
         type: "danger",
-        message: err.response.data.msg,
+        message: res.response.data.msg,
       });
     }
   };

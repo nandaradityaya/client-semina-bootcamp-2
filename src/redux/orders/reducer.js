@@ -16,7 +16,7 @@ const statuslist = {
 const initialState = {
   data: [],
   page: 1,
-  limit: 10, // limit data per page
+  limit: 10, // limit data per page di table
   pages: 1,
   date: {
     startDate: new Date(), // startDate: moment(getState().orders?.date?.startDate).format("YYYY-MM-DD"),

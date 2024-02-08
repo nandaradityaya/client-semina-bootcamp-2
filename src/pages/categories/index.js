@@ -13,7 +13,7 @@ import { setNotif } from "../../redux/notif/actions";
 import { accessCategories } from "../../const/access";
 
 function Categories() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // useNavigate ini untuk mengarahkan ke halaman lain, jadi bukan pakai to
   const dispatch = useDispatch();
 
   const notif = useSelector((state) => state.notif); // ambil state notif dari redux store | state awalnya false

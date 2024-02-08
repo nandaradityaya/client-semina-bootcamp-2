@@ -6,7 +6,7 @@ import { AppRoutes } from "./routes";
 
 function App() {
   useEffect(() => {
-    listen(); // jalanin dia waktu pertama kali halaman di render
+    listen(); // jalanin dia waktu pertama kali halaman di render | fungsi listen ini ada di src/redux/listener.js agar ketika refresh halaman, data di redux tidak hilang
   }, []);
 
   return (

@@ -9,11 +9,13 @@ import {
   accessParticipant,
   accessPayments,
   accessOrders,
+  accessOrganizers,
+  accessAdmin,
 } from "../../const/access";
 
 function SNavbar() {
   const navigate = useNavigate();
-  const [role, setRole] = useState(null);
+  const [role, setRole] = useState(null); // state role
 
   useEffect(() => {
     const fetchData = () => {
@@ -21,7 +23,7 @@ function SNavbar() {
         ? JSON.parse(localStorage.getItem("auth"))
         : {};
 
-      setRole(role); // set state role
+      setRole(role); // set state role agar sistem tau role siapa yang login
     };
     fetchData();
   }, []);
@@ -64,13 +66,20 @@ function SNavbar() {
           >
             Payment
           </NavLink>
-          {/* <NavLink
+          <NavLink
             role={role}
-            roles={organizers.lihat}
-            action={() => navigate('/organizers')}
+            roles={accessOrganizers.lihat}
+            action={() => navigate("/organizers")}
           >
             Oranizer
-          </NavLink> */}
+          </NavLink>
+          <NavLink
+            role={role}
+            roles={accessAdmin.lihat}
+            action={() => navigate("/admins")}
+          >
+            Admin
+          </NavLink>
           <NavLink
             role={role}
             roles={accessEvents.lihat}

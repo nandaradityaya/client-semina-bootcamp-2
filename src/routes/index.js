@@ -18,6 +18,7 @@ export function AppRoutes() {
         path="login"
         element={
           <GuestOnlyRoute>
+            {/* halaman login di bungkus pake GuestOnlyRoute yg berarti ini unauthentication atau blm login */}
             <Login />
           </GuestOnlyRoute>
         }

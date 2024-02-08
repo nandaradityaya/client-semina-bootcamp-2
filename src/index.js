@@ -12,6 +12,8 @@ import "react-date-range/dist/theme/default.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    {/* Provider dari react-redux utk ngebungkus semua App, lalu di Provider ada store dari redux juga agar masing2 routing dapat menggunakan store global yg ada di redux */}
+    {/* masing2 routing nanti jadi bisa pake store yg ada di redux */}
     <Provider store={store}>
       <App />
     </Provider>

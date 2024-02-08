@@ -24,7 +24,7 @@ export default function SForm({ form, handleChange, handleSubmit, isLoading }) {
       />
       <SButton
         loading={isLoading}
-        disabled={isLoading}
+        disabled={isLoading} // klo isLoading true maka buttonnya disable
         variant="primary"
         action={handleSubmit}
       >

@@ -6,8 +6,8 @@ import moment from "moment";
 import { config } from "../../configs";
 
 function TbodyWithAction({
-  data,
-  display,
+  data, // data dari API
+  display, // display itu panjang arraynya
   editUrl,
   deleteAction,
   customAction,

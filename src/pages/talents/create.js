@@ -84,15 +84,16 @@ function TalentsCreate() {
 
   const handleSubmit = async () => {
     setIsLoading(true); // loading dulu sebelum post ke server
-    try {
-      const payload = {
-        image: form.file,
-        role: form.role,
-        name: form.name,
-      }; // simpan payload untuk dikirim ke server | samain aja seperti body di postman
 
-      const res = await postData("/cms/talents", payload);
+    const payload = {
+      image: form.file,
+      role: form.role,
+      name: form.name,
+    }; // simpan payload untuk dikirim ke server | samain aja seperti body di postman
 
+    const res = await postData("/cms/talents", payload);
+
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -102,13 +103,13 @@ function TalentsCreate() {
       );
       navigate("/talents");
       setIsLoading(false);
-    } catch (err) {
+    } else {
       setIsLoading(false);
       setAlert({
         ...alert,
         status: true,
         type: "danger",
-        message: err.response.data.msg,
+        message: res.response.data.msg,
       });
     }
   };

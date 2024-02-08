@@ -41,7 +41,7 @@ export const fetchCategories = () => {
         dispatch(clearNotif());
       }, 5000); // clear notif alert setelah 5 detik
 
-      let res = await debouncedFetchCategories("/cms/categories");
+      let res = await debouncedFetchCategories("/cms/categories"); // API CMS Categories (ini isinya data)
 
       // jika success, maka jalankan successFetchingCategories, agar data yang didapat dari server bisa diolah di reducer dan muncul datanya di halaman client
       dispatch(
